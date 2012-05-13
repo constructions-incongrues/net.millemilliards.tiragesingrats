@@ -1,0 +1,25 @@
+{
+    "hash": "f63ad2358f12c34945f14988832691d3",
+    "packages": [
+        {
+            "package": "symfony/console",
+            "version": "dev-master",
+            "source-reference": "ec3d45fafea157507b7dce339ce5a7c29de7642d",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/console",
+            "version": "dev-master",
+            "source-reference": "ec3d45fafea157507b7dce339ce5a7c29de7642d"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": [
+
+    ]
+}

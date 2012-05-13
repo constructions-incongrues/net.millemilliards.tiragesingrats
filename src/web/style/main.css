@@ -1,0 +1,9 @@
+div#container {text-align:center;}
+p.footer {font-size:0.7em;}
+p.reload {font-size:1.0em;}
+div.images {border:solid 1px black;padding:0.5em;}
+div.images img {vertical-align:top;}
+body {font-family: 'Comfortaa', sans-serif;}
+h1 {font-family: 'Vibur', cursive;}
+h2 {font-size:1.2em;}
+blockquote {font-size:0.9em;}
