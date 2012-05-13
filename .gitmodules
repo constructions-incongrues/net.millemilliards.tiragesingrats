@@ -1,0 +1,3 @@
+[submodule "opt/ananas-build-toolkit"]
+	path = opt/ananas-build-toolkit
+	url = git@github.com:contructions-incongrues/ananas-build-toolkit.git
