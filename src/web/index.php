@@ -57,13 +57,14 @@ if ($image1 && $image2 && $image3) {
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr" prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<title><?php echo $title ?> | Mille Milliards | Tirages Ingrats</title>
 	<link href='http://fonts.googleapis.com/css?family=Vibur' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="style/main.css"></link>
+	<meta property="og:description" content="Sordide fleuron de la littérature populaire, le roman photo aborde au travers de ses clichés empathiques les thèmes essentiels à l'épanouissement moral des lectrices et lecteurs civilisés. Tirages Ingrats est un générateur de fotonovelas aléatoires, absurdes et incongrues, prônant la décadence de l'empire Romance." />
 </head>
 
 <body>
