@@ -54,7 +54,7 @@ class UpdateCacheCommand extends Command
     		foreach ($nodes as $node) {
     			$roman = array('url' => 'http://www.girls.fr/'.$node->getAttribute('href'), 'title' => $node->textContent, 'id' => basename($node->getAttribute('href'), '.html'));	
     			$romans[] = $roman;
-    			$output->writeln(sprintf('Processing roman %s (%s)', $roman['title'], $roman['id']));
+    			$output->writeln(sprintf('Processing roman <info>%s</info> (%s)', $roman['title'], $roman['id']));
     			$dirRoman = $dirData.'/'.$roman['id'];
 
                 // If roman directory does not already exists
@@ -66,7 +66,7 @@ class UpdateCacheCommand extends Command
                             unlink($file);
                         }
                         rmdir($dirRoman);
-                        $output->writeln(sprintf('Creating cache for roman "%s" (forced reload)', $roman['id']));
+                        $output->writeln(sprintf('Creating cache for roman "%s" (<comment>forced reload</comment>)', $roman['id']));
                     } else {
                         $output->writeln(sprintf('Creating cache for roman "%s"', $roman['id']));
                     }
