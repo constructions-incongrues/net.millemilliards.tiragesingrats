@@ -1,5 +1,10 @@
 # local image cache
 src/web/data/*
+!src/web/data/sources.txt
 
 # ananas build toolkit
 etc/prod
+
+# editors
+*~
+*.swp
