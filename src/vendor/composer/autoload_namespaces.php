@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Symfony\\Component\\Console' => array($vendorDir . '/symfony/console/', $vendorDir . '/symfony/console/'),
+    'Symfony\\Component\\Console' => array($baseDir . '/vendor/symfony/console/', $baseDir . '/vendor/symfony/console/'),
 );
