@@ -93,7 +93,7 @@ if ($image1 && $image2 && $image3) {
 
 		<blockquote>Sordide fleuron de la littérature populaire, le roman photo aborde au travers de ses clichés empathiques les thèmes essentiels à l'épanouissement moral des lectrices et lecteurs civilisés. Tirages Ingrats est un générateur de fotonovelas aléatoires, absurdes et incongrues, prônant la décadence de l'empire Romance.</blockquote>
 
-		<p class="footer"><a href="http://www.millemilliards.net/tiragesingrats/">Tirages Ingrats</a> est développé conjointement par <a href="http://templevengeance.incongru.org">Temple Vengeance</a> et <a href="http://www.constructions-incongrues.net">Constructions Incongrues</a>. Le code source est <a href="http://github.com/constructions-incongrues/net.millemilliards.tiragesingrats">diffusé</a> sous license <a href="http://millemilliards.net/identites/">AGPL3</a>. Le projet est hébergé par <a href="http://www.pastis-hosting.net">Pastis Hosting</a>.</p>
+		<p class="footer"><a href="http://www.millemilliards.net/tiragesingrats/">Tirages Ingrats</a> est développé conjointement par <a href="http://templevengeance.incongru.org">Temple Vengeance</a> et <a href="http://www.constructions-incongrues.net">Constructions Incongrues</a>. Le code source est <a href="https://github.com/contructions-incongrues/net.millemilliards.tiragesingrats">diffusé</a> sous license <a href="http://millemilliards.net/identites/">AGPL3</a>. Le projet est hébergé par <a href="http://www.pastis-hosting.net">Pastis Hosting</a>.</p>
 	</div>
 </body>
 </html>
