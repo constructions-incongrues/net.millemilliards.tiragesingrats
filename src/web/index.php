@@ -5,20 +5,10 @@ use Goutte\Client;
 $image1 = filter_input(INPUT_GET, 'image1');
 $image2 = filter_input(INPUT_GET, 'image2');
 $image3 = filter_input(INPUT_GET, 'image3');
+$title = urldecode(filter_input(INPUT_GET, 'title'));
 
-if ($image1 && $image2 && $image3) {
+if ($image1 && $image2 && $image3 && $title) {
 	$html = array();
-
-	// Title
-	$client = new Client();
-	$crawler = $client->request('GET', sprintf('http://www.ma-confession.fr/page-%d.php', rand(1, 71)));
-	$nodes = $crawler->filter('div.titre a');
-	$titles = array();
-	foreach ($nodes as $node) {
-		$titles[] = $node->textContent;
-	}
-	shuffle($titles);
-	$title = ucfirst(trim($titles[0], '"'));
 
 	// Images
 	$html[] = sprintf('<img src="data/%s/%s" />', basename(dirname($image1)), basename($image1));
@@ -31,6 +21,17 @@ if ($image1 && $image2 && $image3) {
 		$numImages = filter_input(INPUT_GET, 'count', FILTER_VALIDATE_INT);
 	}
 
+	// Title
+	$client = new Client();
+	$crawler = $client->request('GET', sprintf('http://www.ma-confession.fr/page-%d.php', rand(1, 71)));
+	$nodes = $crawler->filter('div.titre a');
+	$titles = array();
+	foreach ($nodes as $node) {
+		$titles[] = $node->textContent;
+	}
+	shuffle($titles);
+	$title = ucfirst(trim($titles[0], '"'));
+
 	// Get first image
 	$imagesFirst = glob(sprintf('%s/*/1_*.jpg', $dirData));
 	shuffle($imagesFirst);
@@ -42,6 +43,7 @@ if ($image1 && $image2 && $image3) {
 	$images = array_splice($images, 0, $numImages);
 	array_unshift($images, $imageFirst);
 	$images = array_unique($images);
+	$parameters = array('title='.urlencode($title));
 	for ($i = 0; $i < count($images); $i++) {
 		$image = $images[$i];
 		$parameters[] = sprintf('image%d=%s/%s',$i+1, basename(dirname($image)), basename($image));
