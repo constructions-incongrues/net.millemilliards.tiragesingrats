@@ -1,7 +1,7 @@
 Usage
 =====
 
-````bash
+````
 Usage:
  ./tiragesingrats cache:update [--force-reload]
 
