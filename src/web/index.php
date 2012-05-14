@@ -7,18 +7,14 @@ $image2 = filter_input(INPUT_GET, 'image2');
 $image3 = filter_input(INPUT_GET, 'image3');
 $title = urldecode(filter_input(INPUT_GET, 'title'));
 
-if ($image1 && $image2 && $image3 && $title) {
-	$html = array();
-
-	// Images
-	$html[] = sprintf('<img src="data/%s/%s" />', basename(dirname($image1)), basename($image1));
-	$html[] = sprintf('<img src="data/%s/%s" />', basename(dirname($image2)), basename($image2));
-	$html[] = sprintf('<img src="data/%s/%s" />', basename(dirname($image3)), basename($image3));
-} else {
+if (!$image1 || !$image2 || !$image3 || !$title) {
+	// Base parameters
 	$dirData = __DIR__.'/data';
 	$numImages = 3;
-	if (isset($_GET['count'])) {
-		$numImages = filter_input(INPUT_GET, 'count', FILTER_VALIDATE_INT);
+
+	// Sanity checks
+	if (!is_readable($dirData)) {
+		throw new RuntimeException(sprintf('Directory "%s" is not readable', $dirData));
 	}
 
 	// Title
@@ -90,12 +86,15 @@ if ($image1 && $image2 && $image3 && $title) {
 		<p class="reload"><a href="<?php echo $_SERVER['PHP_SELF'] ?>">suivant >></a></p>
 
 		<div class="images">
-			<?php echo implode("\n", $html); ?>
+<?php foreach (array($image1, $image2, $image3) as $image): ?>
+			<img src="<?php echo sprintf('data/%s/%s', basename(dirname($image)), basename($image)) ?>" />
+<?php endforeach; ?>
 		</div>
 
 		<blockquote>Sordide fleuron de la littérature populaire, le roman photo aborde au travers de ses clichés empathiques les thèmes essentiels à l'épanouissement moral des lectrices et lecteurs civilisés. Tirages Ingrats est un générateur de fotonovelas aléatoires, absurdes et incongrues, prônant la décadence de l'empire Romance.</blockquote>
 
 		<p class="footer"><a href="http://www.millemilliards.net/tiragesingrats/">Tirages Ingrats</a> est développé conjointement par <a href="http://templevengeance.incongru.org">Temple Vengeance</a> et <a href="http://www.constructions-incongrues.net">Constructions Incongrues</a>. Le code source est <a href="https://github.com/contructions-incongrues/net.millemilliards.tiragesingrats">diffusé</a> sous license <a href="http://millemilliards.net/identites/">AGPL3</a>. Le projet est hébergé par <a href="http://www.pastis-hosting.net">Pastis Hosting</a>.</p>
+		<p class="footer"><a href="mailto:contact@millemilliards.net">Contact</a></p>
 	</div>
 </body>
 </html>
