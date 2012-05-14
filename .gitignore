@@ -1,1 +1,5 @@
+# local image cache
 src/web/data/*
+
+# ananas build toolkit
+etc/prod
