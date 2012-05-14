@@ -1,10 +1,10 @@
 #!/usr/bin/env php
 <?php
 // Composer
-require 'vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 // Dependencies
-require_once(__DIR__).'/../lib/Net/Millemilliards/Romance/UpdateCacheCommand.php';
+require_once(__DIR__.'/../lib/Net/Millemilliards/Romance/UpdateCacheCommand.php');
 require_once(__DIR__.'/../vendor/goutte.phar');
 use Net\Millemilliards\Romance\UpdateCacheCommand;
 use Symfony\Component\Console\Application;
