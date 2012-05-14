@@ -5,14 +5,11 @@ require 'vendor/autoload.php';
 
 // Dependencies
 require_once(__DIR__).'/../lib/Net/Millemilliards/Romance/UpdateCacheCommand.php';
-require_once(__DIR__).'/../lib/Net/Millemilliards/Romance/GenerateRomanCommand.php';
 require_once(__DIR__.'/../vendor/goutte.phar');
 use Net\Millemilliards\Romance\UpdateCacheCommand;
-use Net\Millemilliards\Romance\GenerateRomanCommand;
 use Symfony\Component\Console\Application;
 
 // Execute command
 $application = new Application();
 $application->add(new UpdateCacheCommand());
-$application->add(new GenerateRomanCommand());
 $application->run();
