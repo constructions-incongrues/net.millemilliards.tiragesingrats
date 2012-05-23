@@ -22,7 +22,7 @@ class UpdateCacheCommand extends Command
     {
         // Base parameters
     	$urlBase = 'http://www.girls.fr/roman-photo_234.php';
-        $dirData = realpath(__DIR__.'/../../../../web/data');
+        $dirData = realpath(__DIR__.'/../../../../web/data/rosa');
         $output->writeln('Using base URL : '.$urlBase);
         $output->writeln('Using data dir : '.$dirData);
 
