@@ -2,14 +2,14 @@
 require_once(__DIR__.'/../vendor/goutte.phar');
 use Goutte\Client;
 
+// Base parameters
+$dirData = __DIR__.'/data';
 $image1 = filter_input(INPUT_GET, 'image1');
 $image2 = filter_input(INPUT_GET, 'image2');
 $image3 = filter_input(INPUT_GET, 'image3');
 $title = urldecode(filter_input(INPUT_GET, 'title'));
 
 if (!$image1 || !$image2 || !$image3 || !$title) {
-	// Base parameters
-	$dirData = __DIR__.'/data';
 
 	// Sanity checks
 	if (!is_readable($dirData)) {
@@ -30,12 +30,12 @@ if (!$image1 || !$image2 || !$image3 || !$title) {
 	}
 
 	// Get first image
-	$imagesFirst = glob(sprintf('%s/*/1_*.jpg', $dirData));
+	$imagesFirst = glob(sprintf('%s/*/*/1_*.jpg', $dirData));
 	shuffle($imagesFirst);
 	$imageFirst = $imagesFirst[0];
 
 	// Get remaining images
-	$images = glob(sprintf('%s/*/*.jpg', $dirData));
+	$images = glob(sprintf('%s/*/*/*.jpg', $dirData));
 	shuffle($images);
 	$images = array_splice($images, 0, 2);
 	array_unshift($images, $imageFirst);
@@ -56,7 +56,7 @@ if (!$image1 || !$image2 || !$image3 || !$title) {
 	$parameters = array('title='.urlencode($title));
 	for ($i = 0; $i < count($images); $i++) {
 		$image = $images[$i];
-		$parameters[] = sprintf('image%d=%s/%s',$i+1, basename(dirname($image)), basename($image));
+		$parameters[] = sprintf('image%d=%s/%s/%s',$i+1, basename(dirname(dirname($image))), basename(dirname($image)), basename($image));
 	}
 
 	$queryString = implode('&', $parameters);
@@ -79,7 +79,6 @@ if (!$image1 || !$image2 || !$image3 || !$title) {
 	<link rel="stylesheet" type="text/css" href="style/main.css"></link>
 	<meta property="og:description" content="Sordide fleuron de la littérature populaire, le roman photo aborde au travers de ses clichés empathiques les thèmes essentiels à l'épanouissement moral des lectrices et lecteurs civilisés. Tirages Ingrats est un générateur de fotonovelas aléatoires, absurdes et incongrues, prônant la décadence de l'empire Romance." />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="js/behaviors.js"></script>
 
 	<script type="text/javascript">
 
@@ -105,11 +104,13 @@ if (!$image1 || !$image2 || !$image3 || !$title) {
 
 		<div class="images">
 <?php foreach (array($image1, $image2, $image3) as $image): ?>
-			<img src="<?php echo sprintf('data/%s/%s', basename(dirname($image)), basename($image)) ?>" />
+	<?php $category = basename(dirname(dirname($image))) ?>
+			<img title="<?php echo ucfirst($category) ?>" class="<?php echo $category ?>" src="<?php echo sprintf('data/%s/%s/%s', basename(dirname(dirname($image))), basename(dirname($image)), basename($image)) ?>" />
 <?php endforeach; ?>
 		</div>
 
 		<blockquote>Sordide fleuron de la littérature populaire, le roman photo aborde au travers de ses clichés empathiques les thèmes essentiels à l'épanouissement moral des lectrices et lecteurs civilisés. Tirages Ingrats est un générateur de fotonovelas aléatoires, absurdes et incongrues, prônant la décadence de l'empire Romance.</blockquote>
+		<blockquote>Tirages Ingrats génère des histoires à partir d'un corpus de <strong><?php echo count(glob(sprintf('%s/*/*/*.jpg', $dirData))); ?></strong> photos.</blockquote>
 
 		<p class="footer"><a href="http://www.millemilliards.net/tiragesingrats/">Tirages Ingrats</a> est développé conjointement par <a href="http://templevengeance.incongru.org">Temple Vengeance</a> et <a href="http://www.constructions-incongrues.net">Constructions Incongrues</a>. Le code source est <a href="https://github.com/contructions-incongrues/net.millemilliards.tiragesingrats">diffusé</a> sous license <a href="http://millemilliards.net/identites/">AGPL3</a>. Le projet est hébergé par <a href="http://www.pastis-hosting.net">Pastis Hosting</a>.</p>
 		<p class="footer"><a href="mailto:contact@millemilliards.net">Contact</a></p>
