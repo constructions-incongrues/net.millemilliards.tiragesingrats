@@ -10,7 +10,6 @@ $title = urldecode(filter_input(INPUT_GET, 'title'));
 if (!$image1 || !$image2 || !$image3 || !$title) {
 	// Base parameters
 	$dirData = __DIR__.'/data';
-	$numImages = 3;
 
 	// Sanity checks
 	if (!is_readable($dirData)) {
@@ -18,15 +17,17 @@ if (!$image1 || !$image2 || !$image3 || !$title) {
 	}
 
 	// Title
-	$client = new Client();
-	$crawler = $client->request('GET', sprintf('http://www.ma-confession.fr/page-%d.php', rand(1, 71)));
-	$nodes = $crawler->filter('div.titre a');
-	$titles = array();
-	foreach ($nodes as $node) {
-		$titles[] = $node->textContent;
+	if (!$title) {
+		$client = new Client();
+		$crawler = $client->request('GET', sprintf('http://www.ma-confession.fr/page-%d.php', rand(1, 71)));
+		$nodes = $crawler->filter('div.titre a');
+		$titles = array();
+		foreach ($nodes as $node) {
+			$titles[] = $node->textContent;
+		}
+		shuffle($titles);
+		$title = ucfirst(trim($titles[0], '"'));
 	}
-	shuffle($titles);
-	$title = ucfirst(trim($titles[0], '"'));
 
 	// Get first image
 	$imagesFirst = glob(sprintf('%s/*/1_*.jpg', $dirData));
@@ -36,14 +37,28 @@ if (!$image1 || !$image2 || !$image3 || !$title) {
 	// Get remaining images
 	$images = glob(sprintf('%s/*/*.jpg', $dirData));
 	shuffle($images);
-	$images = array_splice($images, 0, $numImages);
+	$images = array_splice($images, 0, 2);
 	array_unshift($images, $imageFirst);
 	$images = array_unique($images);
+
+	// Preserve images that are already set
+	if ($image1) {
+		$images[0] = $image1;
+	}
+	if ($image2) {
+		$images[1] = $image2;
+	}
+	if ($image3) {
+		$images[2] = $image3;
+	}
+
+
 	$parameters = array('title='.urlencode($title));
 	for ($i = 0; $i < count($images); $i++) {
 		$image = $images[$i];
 		$parameters[] = sprintf('image%d=%s/%s',$i+1, basename(dirname($image)), basename($image));
 	}
+
 	$queryString = implode('&', $parameters);
 	header('Location:?'.$queryString);
 }
@@ -63,6 +78,9 @@ if (!$image1 || !$image2 || !$image3 || !$title) {
 	<link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="style/main.css"></link>
 	<meta property="og:description" content="Sordide fleuron de la littérature populaire, le roman photo aborde au travers de ses clichés empathiques les thèmes essentiels à l'épanouissement moral des lectrices et lecteurs civilisés. Tirages Ingrats est un générateur de fotonovelas aléatoires, absurdes et incongrues, prônant la décadence de l'empire Romance." />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/behaviors.js"></script>
+
 	<script type="text/javascript">
 
 	  var _gaq = _gaq || [];
