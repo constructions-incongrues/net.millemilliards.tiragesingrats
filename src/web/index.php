@@ -29,6 +29,11 @@ if (!$image1 || !$image2 || !$image3 || !$title) {
 		$title = ucfirst(trim($titles[0], '"'));
 	}
 
+	// Title fallback
+        if (!$title) {
+                $title = '...';
+        }
+
 	// Get first image
 	$imagesFirst = glob(sprintf('%s/*/*/1_*.jpg', $dirData));
 	shuffle($imagesFirst);
